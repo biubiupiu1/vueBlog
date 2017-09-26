@@ -1,10 +1,12 @@
 <template>
   <div id="app">
+    <my-header></my-header>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import myHeader from './components/Header.vue'
 export default {
   name: 'app',
   data(){
@@ -12,6 +14,7 @@ export default {
 
       }
   },
+  components:{ myHeader },
   created(){
     this.ReSize();
     window.addEventListener("resize", () => {
@@ -22,6 +25,7 @@ export default {
       ReSize(){
           let w = document.body.clientWidth;
           let rem = w * 0.05 > 25 ? 25 : w * 0.05;
+          this.$store.state.rem = rem;
           document.documentElement.style.fontSize = rem + "px";
       }
   }
@@ -29,5 +33,5 @@ export default {
 </script>
 
 <style>
-@import "assets/all.less";
+@import "assets/css/all.less";
 </style>

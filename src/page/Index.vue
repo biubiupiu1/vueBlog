@@ -1,18 +1,18 @@
 <template>
-  <div class="Index">
-    <my-header></my-header>
+  <div class="index">
+    <lists :list="{time: '2017-09-26' , title: 'JavaScript数据结构《队列》'}" v-for="n in 4"></lists>
   </div>
 </template>
 
 <script>
-  import myHeader from '../components/Header.vue'
+  import Lists from '../components/Lists.vue'
   export default {
-    components:{ myHeader },
     data () {
       return {
 
       }
     },
+    components:{Lists}
   }
 </script>
 
