@@ -48,14 +48,7 @@ p{
   color: #444;
   padding-left: 50px;
 }
-.lists{
-  width: 45%;
-  margin: 0 auto;
-}
 @media screen and (max-width: 700px) {
-  .lists{
-    width: 85%;
-  }
   .list{
     padding: 1.2rem 0;
     display: block;

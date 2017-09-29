@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <my-header></my-header>
-    <router-view></router-view>
+    <div class="content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -34,4 +36,13 @@ export default {
 
 <style>
 @import "assets/css/all.less";
+.content{
+  width: 45%;
+  margin: 0 auto;
+}
+@media screen and (max-width: 700px) {
+  .content{
+    width: 85%;
+  }
+}
 </style>

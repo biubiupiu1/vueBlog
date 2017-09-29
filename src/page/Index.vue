@@ -7,12 +7,26 @@
 <script>
   import Lists from '../components/Lists.vue'
   export default {
+    components:{Lists},
     data () {
       return {
 
       }
     },
-    components:{Lists}
+    created(){
+      this.LoadArticle();
+    },
+    methods:{
+      LoadArticle(){
+        this.$http.get('/api/articleList')
+          .then(function (res) {
+            console.log(res);
+          })
+          .catch(function (err) {
+            console.log(err);
+          });
+      }
+    }
   }
 </script>
 

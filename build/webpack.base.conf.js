@@ -25,6 +25,17 @@ module.exports = {
       '@': resolve('src'),
     }
   },
+  devServer: {
+    historyApiFallback: true,
+    noInfo: true,
+    proxy: [{
+      // 前端ajax请求的接口有带上下文为/api都代理到node的7000端口
+      context: ['/api'],
+      target: 'http://localhost:7000',
+      changeOrigin: true,
+      secure: false
+    }]
+  },
   module: {
     rules: [
       {
