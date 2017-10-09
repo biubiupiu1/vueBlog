@@ -52,29 +52,7 @@ router.post('/api/articleList', function(req, res){
 
 });
 
-// 查询文章列表路由 用于博客后端管理系统包含草稿和已发布文章数据
-router.get('/api/admin/articleList', function(req, res){
-    db.Article.find({}, function(err, docs){
-        if (err) {
-            console.log('出错'+ err);
-            return
-        }
-        res.json(docs)
-    })
-});
 
-
-
-// 查询文章列表路由(根据标签返回对应的文章列表) 用于博客后端管理系统包含草稿和已发布文章数据
-router.post('/api/admin/articleList', function(req, res){
-    db.Article.find({label: req.body.label}, function(err, docs){
-        if (err) {
-            console.log('出错'+ err);
-            return
-        }
-        res.json(docs)
-    })
-});
 // 查询文章详情路由
 router.get('/api/articleDetails/:id', function(req, res){
     db.Article.findOne({_id: req.params.id}, function(err, docs){
@@ -84,6 +62,8 @@ router.get('/api/articleDetails/:id', function(req, res){
         res.send(docs)
     })
 });
+
+
 router.post('/api/articleDetails', function(req, res){
     db.Article.findOne({_id: req.body.id}, function(err, docs){
         if (err) {
@@ -92,6 +72,8 @@ router.post('/api/articleDetails', function(req, res){
         res.send(docs)
     })
 });
+
+
 // 文章保存路由
 router.post('/api/saveArticle', function(req, res){
     if(req.body.obj._id)
@@ -147,8 +129,6 @@ router.post('/api/delect/article', function(req, res){
     db.Article.find({_id: req.body._id}, function(err, docs){
         if(err) return;
 
-        console.log(docs);
-
         db.Article.remove({_id: req.body._id}, function(err, docs){
             if (err) {
                 res.status(500).send();
@@ -160,7 +140,6 @@ router.post('/api/delect/article', function(req, res){
         if (docs.length > 0 && docs[0].state != 'draft') {
             db.Article.find({label: docs[0].label},function(err, ArticleList){
                 if (err) return;
-                console.log(ArticleList);
                 db.TagList.find({tagName: docs[0].label}, function(err, Tags){
                     if(Tags.length>0){
                         Tags[0].tagNumber = ArticleList.length;
@@ -177,7 +156,6 @@ router.post('/api/delect/article', function(req, res){
 router.post('/api/getArticleLabel', function(req, res){
     if(!req.body.state){
         db.TagList.find({}, function(err, docs){
-            console.log(docs);
             if (err)return;
             res.json(docs);
         })
@@ -197,7 +175,6 @@ router.post('/api/getArticleLabel', function(req, res){
                     }
                     data[index].lists = _docs;
                     if(index+1 === docs.length){
-                        console.log(data)
                         res.json(data);
                     }
                 })
@@ -230,44 +207,25 @@ router.post('/api/saveArticleLabel', function(req, res){
         }
     })
 });
-// 博客信息路由
-router.post('/api/save/personalInformation', function(req, res){
-    db.PersonalInformation.find({}, function(err, docs){
-        if (err) {
-            res.status(500).send();
-            return
-        }
-        if(docs.length>0){
-            docs[0].name = req.body.form.name
-            docs[0].individualitySignature = req.body.form.individualitySignature
-            docs[0].introduce = req.body.form.introduce
-            db.PersonalInformation(docs[0]).save(function(err){
-                if (err) {
-                    res.status(500).send();
-                    return
-                }
-                res.send();
-            })
-        } else {
-            new db.PersonalInformation(req.body.from).save(function(err){
-                if (err){
-                    res.status(500).send();
-                    return
-                }
-                res.send();
-            })
-        }
-    })
-})
 
-router.get('/api/personalInformation', function(req, res){
-    db.PersonalInformation.find({}, function(err, docs){
-        if (err) {
-            res.status(500).send();
-            return
-        }
-        res.json(docs)
+router.post('/api/delArticleLabel', function(req, res){
+
+    db.Article.find({label: req.body.tag.tagName}, function(err, docs){
+        if(err) return;
+        docs.forEach(function (e , index) {
+            docs[index].label = "未分类";
+            db.Article(docs[index]).save(function(error){})
+        })
     })
+
+    db.TagList.remove({_id: req.body.tag._id}, function(err, docs){
+        if(err){
+            res.json({error: true, msg: '标签删除失败'});
+            return;
+        }
+        res.json({error: false, msg: '删除成功'});
+    })
+
 })
 
 module.exports = router
