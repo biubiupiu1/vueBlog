@@ -19,10 +19,10 @@
         aboutBiu:[
             {title:'关于作者',content: '在校大二dog、懂基础JavaScript、Vue、Node、Three等。不善表达'},
           {title:'关于博客',content: '该博客借鉴于一位<a href="https://lweiwei.com/">大佬</a>的由Angular4实现的博客系统，现用Vue重写，express提供数据接口，mongoDB储存数据，部署在阿里云的服务器上，博客的初衷是希望把自己平常学习总结的东西记录下来，以便不时之需可以查阅。 <a href="https://github.com/biubiupiu1/vueBlog">博客源码</a>'},
-          {title:'联系作者',content: 'Email：1368033036@qq.com <br/>' +
+          {title:'联系作者',content: 'Email：1757191096@qq.com <br/>' +
           'GitHub：<a href="https://github.com/biubiupiu1">https://github.com/biubiupiu1</a><br/>' +
           'Weibo：<a href="https://weibo.com/6052229892/">https://weibo.com/6052229892/</a>'}
-            ]
+          ]
       }
     }
   }

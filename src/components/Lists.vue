@@ -1,9 +1,11 @@
 <template>
   <div class="lists">
-    <li class="list">
-      <p class="time">{{list.time}}</p>
-      <p class="title">{{list.title}}</p>
-    </li>
+    <router-link :to="`Article/${this.list._id}`">
+      <li class="list">
+        <p class="time">{{list.date | loadDate}}</p>
+        <p class="title">{{list.title}}</p>
+      </li>
+    </router-link>
   </div>
 </template>
 
@@ -16,7 +18,15 @@ export default {
 
     }
   },
-  props:['list']
+  props:['list'],
+  created(){
+    console.log(this.list);
+  },
+  filters:{
+    loadDate(val){
+      return val.split(" ")[0];
+    },
+  }
 }
 </script>
 

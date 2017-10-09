@@ -1,14 +1,15 @@
 <template>
   <div class="tags">
-    <template>
+    <div v-for="(item , index) in tags" :key="index">
       <div class="tagName">
         <h1></h1>
-        <p>数据结构</p>
+        <p>{{item.tag.tagName}}</p>
       </div>
       <div class="content_list">
-        <lists :list="{time: '2017-09-26' , title: 'JavaScript数据结构《队列》'}" v-for="n in 4"></lists>
+        <p v-if="item.lists.length === 0">暂无内容@_@</p>
+        <lists :list="_item" v-for="_item in item.lists" :key="_item._id"></lists>
       </div>
-    </template>
+    </div>
   </div>
 </template>
 
@@ -18,10 +19,28 @@
     name: 'Tags',
     data () {
       return {
-
+        tags: null
       }
     },
-    components:{Lists}
+    components:{Lists},
+    created(){
+      this.LoadTags();
+    },
+    methods:{
+      LoadTags(){
+        this.$http.post('/api/getArticleLabel' , {state: 1})
+          .then(function (res) {
+              this.tags = res.data;
+              console.log(res.data);
+          }.bind(this))
+          .catch(function (err) {
+            console.log(err);
+          });
+      },
+      LoadLists(){
+
+      }
+    }
   }
 </script>
 
@@ -42,6 +61,9 @@ p{
 }
 .content_list{
   padding-left: 15px;
+}
+.content_list>p{
+  font-size: .65rem;
 }
 @media screen and (max-width: 700px) {
 }

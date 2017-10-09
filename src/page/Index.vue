@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    <lists :list="{time: '2017-09-26' , title: 'JavaScript数据结构《队列》'}" v-for="n in 4"></lists>
+    <lists v-for="item in lists" :list="item" :key="item._id"></lists>
   </div>
 </template>
 
@@ -10,7 +10,7 @@
     components:{Lists},
     data () {
       return {
-
+        lists: [],
       }
     },
     created(){
@@ -20,10 +20,9 @@
       LoadArticle(){
         this.$http.get('/api/articleList')
           .then(function (res) {
-            console.log(res);
-          })
+            this.lists = res.data;
+          }.bind(this))
           .catch(function (err) {
-            console.log(err);
           });
       }
     }
