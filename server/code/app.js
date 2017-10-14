@@ -42,7 +42,6 @@ app.get('/admin', function(req, res) {
     if (isLogined){
         console.log('已登录')
         var html = fs.readFileSync(resolve('../admin.html'), 'utf-8');
-		console.log(html);
     }else{
         console.log('未登录')
         var html = fs.readFileSync(resolve('../' + 'login.html'), 'utf-8');
@@ -53,7 +52,6 @@ app.get('/admin', function(req, res) {
 // 博客首页
 app.get('*', function(req, res) {
     var html = fs.readFileSync(resolve('../' + 'index.html'), 'utf-8');
-	console.log(html);
     res.send(html)
 });
 

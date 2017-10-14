@@ -11,8 +11,8 @@
                     </ul>
                 </el-popover>
                 <img src="../assets/tag.png" height="30" width="30" v-popover:tag>
-                <el-tag v-for="(item,index) in list" :closable="true" type="success" :key="index" :close-transition="false" @close="handleClose">
-                    {{item.tagName}}
+                <el-tag :closable="true" type="success"  :close-transition="false" @close="handleClose" v-if="lable !== ''">
+                    {{lable}}
                 </el-tag>
             </div>
             <div class="action-button">
@@ -38,7 +38,7 @@ export default {
             articleTitle: '请输入文章标题',
             content: '',
             tags: [],
-            list: [],
+            lable: '',
             smde: null,
         }
     },
@@ -78,6 +78,24 @@ export default {
 
         )
     },
+    beforeRouteLeave(to, from, next){
+
+        if(localStorage.getItem("change") === "true"){
+
+          this.$confirm('当前文档还未保存, 是否退出?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            localStorage.removeItem("change");
+            next();
+          }).catch(() => {
+          });
+
+        } else
+            next();
+
+    },
     watch:{
         $route(){
             this.init();
@@ -87,76 +105,84 @@ export default {
         init(){
             let self = this;
             let id = this.$route.params.id;
-            this.articleTitle = '请输入文章标题';
-            this.list = [];
+            localStorage.setItem("change","true");
             if( id && id !== "new"){
                 this.$http.post('/api/articleDetails', {
                     id: this.$route.params.id
                 }).then(
                     respone => {
                         this.articleTitle = respone.body.title;
-                        this.list.push({
-                            tagName: respone.body.label
-                        });
+                        this.lable = respone.body.label;
                         this.smde.value(respone.body.articleContent);
                     },
                     respone => console.log(respone)
                 )
             } else {
                 this.smde.value("快来开始写博客吧");
+                this.articleTitle = '请输入文章标题';
             }
         },
         // 删除
         delectArticles: function(){
-            this.$http.post('/api/delect/article', {
-                _id : this.$route.params.id
-            }).then(
-                respone => {
+
+            this.$confirm('删除后无法恢复, 是否删除?', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(() => {
+                this.$http.post('/api/delect/article', {
+                  _id : this.$route.params.id
+                }).then(
+                  respone => {
                     this.$message('删除成功'),
+                    localStorage.removeItem("change");
                     this.$emit('saveArticleInformation'),
                     this.$router.push('/articleList/all')
-                },
-                respone => {
+                  },
+                  respone => {
                     this.$message.error('删除失败请重试')
-                }
-            )
+                  }
+                );
+            }).catch(() => {
+                this.$message('已取消删除');
+            });
+
         },
-    	// 保存草稿
     	submit: function(state){
     	    let self = this;
-            let id = this.$route.params.id;
-            if(!id) return;
-    	    let labelName = this.list.length>0 ? this.list[0].tagName : '未分类';
-            let tObj = {
-                _id: id !== "new" ? id : null,
-                title: this.articleTitle,
-                articleContent: this.content,
-                date: new Date().toLocaleString(),
-                state: state,
-                label: labelName
-            };
+          let id = this.$route.params.id;
+          if(!id) return;
+    	    let labelName = this.lable === '' ? '未分类' : this.lable;
+          let tObj = {
+              _id: id !== "new" ? id : null,
+              title: this.articleTitle,
+              articleContent: this.content,
+              date: new Date().toLocaleString(),
+              state: state,
+              label: labelName
+          };
 
-            let tApi = id !== "new" ? '/api/updateArticle' : '/api/saveArticle';
+          let tApi = id !== "new" ? '/api/updateArticle' : '/api/saveArticle';
 
-            this.$http.post(tApi,{
-                obj: tObj
-            }).then(
-                respone => {
-                    self.successSave();
-                },
-                respone => {
-                    Message.error('文章保存失败')
-                }
-            );
+          this.$http.post(tApi,{
+              obj: tObj
+          }).then(
+              respone => {
+                self.successSave();
+              },
+              respone => {
+                  Message.error('文章保存失败')
+              }
+          );
         },
         selectTag: function(data){
-            this.list = [];
-            this.list.push(data)
+            this.lable = data.tagName;
         },
         handleClose: function(tag) {
-            this.list = []
+            this.lable = ''
         },
         successSave(){
+            localStorage.removeItem("change");
             Message.success('文章发布成功');
             this.$router.push('/articleList/all');
             // 如果文章信息保存成功就给父组件派发一个事件通知它刷新文章列表

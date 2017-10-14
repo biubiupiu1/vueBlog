@@ -111,13 +111,26 @@ router.post('/api/updateArticle', function(req, res){
         docs[0].title = req.body.obj.title
         docs[0].articleContent = req.body.obj.articleContent
         // 不更新文章更改时间
-        docs[0].date = docs[0].date
         docs[0].state = req.body.obj.state
         docs[0].label = req.body.obj.label
         db.Article(docs[0]).save(function(err){
             if (err){
                 res.status(500).send();
                 return
+            }
+            if (req.body.obj.state !== 'draft') {
+              db.Article.find({label:req.body.obj.label},function(err, ArticleList){
+                if (err) {
+                  res.status(500).send();
+                  return
+                }
+                db.TagList.find({tagName:req.body.obj.label}, function(err, docs){
+                  if(docs.length>0){
+                    docs[0].tagNumber = ArticleList.length
+                    db.TagList(docs[0]).save(function(error){})
+                  }
+                })
+              })
             }
             res.send()
         })
