@@ -20,7 +20,6 @@ export default {
   },
   props:['list'],
   created(){
-    console.log(this.list);
   },
   filters:{
     loadDate(val){

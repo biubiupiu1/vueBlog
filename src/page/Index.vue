@@ -18,7 +18,7 @@
     },
     methods:{
       LoadArticle(){
-        this.$http.get('/api/articleList')
+        this.$http.post('/api/articleList')
           .then(function (res) {
             this.lists = res.data;
           }.bind(this))

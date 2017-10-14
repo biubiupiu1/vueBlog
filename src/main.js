@@ -5,6 +5,7 @@ import App from './App'
 import router from './config/router'
 import store from './config/store'
 import axios from 'axios'
+import "../static/iconfont.css"
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios;

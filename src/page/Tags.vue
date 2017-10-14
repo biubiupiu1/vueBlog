@@ -31,7 +31,6 @@
         this.$http.post('/api/getArticleLabel' , {state: 1})
           .then(function (res) {
               this.tags = res.data;
-              console.log(res.data);
           }.bind(this))
           .catch(function (err) {
             console.log(err);

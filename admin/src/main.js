@@ -8,6 +8,7 @@ import articleList from './component/ArticleList.vue'
 import articleEdit from './component/ArticleEdit.vue'
 import atricleLabel from './component/ArticleLabel.vue'
 import articlePreview from './component/ArticlePreview.vue'
+import '../static/iconfont.css'
 
 Vue.use(VueResource);
 Vue.use(VueRouter);
@@ -16,18 +17,13 @@ Vue.use(ElementUI);
 const router = new VueRouter({
 	routes: [
         { path: '/', redirect: '/articleList/all' },
-		{path: '/articleList/:state', component: articleList,name: "articleList",
-		    children: [
-                {path: 'articleEdit/:id', component: articleEdit,name: "articleEdit"},
-                {path: 'articlePreview/:id', component: articlePreview,name: "articlePreview"},
-            ]
-		},
-        {path: '/atricleLabel/whenlable', component: articleList},
-		{path: '/atricleLabel', component: atricleLabel},
-		// {path: '/about', component: about},
-		// {path: '/articleDetails:id', component: articleDetails},
-		// {path: '/classify', component: classify},
-		// {path: '/label', component: label},
+        {path: '/articleList/:state', component: articleList,name: "articleList",
+            children: [
+                    {path: 'articleEdit/:id', component: articleEdit,name: "articleEdit"},
+                    {path: 'articlePreview/:id', component: articlePreview,name: "articlePreview"},
+                ]
+        },
+		    {path: '/atricleLabel', component: atricleLabel},
 	]
 })
 

@@ -43,7 +43,6 @@
         this.$http.get('/api/articleDetails/'+ id).then(
           res => {
             this.article = res.data;
-            console.log(res.data)
           },
           res => console.log('错误'+res)
         )
