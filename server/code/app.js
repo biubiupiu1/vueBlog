@@ -15,7 +15,7 @@ var resolve = file => path.resolve(__dirname, file);
 app.use(compression());
 app.use('/Backstage', express.static(resolve('../Backstage')));
 app.use('/home', express.static(resolve('../home')));
-
+app.use('/biubiupiu', express.static(resolve('../biubiupiu')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -28,7 +28,7 @@ app.use(session({
     saveUninitialized: false,  // 是否自动保存未初始化的会话，建议false
     resave: false,  // 是否每次都重新保存会话，建议false
     cookie: {
-        maxAge: 15 * 60 * 1000  // 有效期，单位是毫秒, 这里设置的是15分钟
+        maxAge: 1000 * 60 * 1000  // 有效期，单位是毫秒, 这里设置的是15分钟
     }
 }));
 
@@ -48,9 +48,13 @@ app.get('/admin', function(req, res) {
     }
 	res.send(html)
 });
+app.get('/blog', function(req, res) {
+    var html = fs.readFileSync(resolve('../' + 'blog.html'), 'utf-8');
+    res.send(html)
+});
 
 // 博客首页
-app.get('*', function(req, res) {
+app.get('/', function(req, res) {
     var html = fs.readFileSync(resolve('../' + 'index.html'), 'utf-8');
     res.send(html)
 });
