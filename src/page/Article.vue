@@ -143,7 +143,9 @@
 .hljs-link {
   text-decoration: underline;
 }
-
+.article_content p img{
+  max-width: 100%;
+}
 </style>
 
 <style scoped>

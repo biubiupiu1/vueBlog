@@ -81,7 +81,7 @@ export default{
 }
 </script>
 
-<style scoped>
+<style>
 li.active{
     background: #20a0ff;
 }
@@ -90,7 +90,7 @@ li.active h3,li.active p{
 }
 </style>
 
-<style>
+<style scoped>
 .article-list {
     width: 230px;
     height: 100%;
