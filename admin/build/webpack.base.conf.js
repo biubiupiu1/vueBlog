@@ -3,13 +3,23 @@ var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
 module.exports = {
   entry: {
     app: './src/main.js'
+  },
+  externals: {
+    'vue': 'Vue',
+    'vue-router': 'VueRouter',
+    'vuex': 'Vuex',
+    'axios': 'axios',
+    'highlight.js': 'hljs',
+    'element-ui': 'ELEMENT',
+    'vue-resource': 'VueResource',
+    'simplemde': 'SimpleMDE',
   },
   output: {
     path: config.build.assetsRoot,

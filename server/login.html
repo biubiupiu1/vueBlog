@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
 </head>
 <style>
-*{
+  * {
     margin: 0;
     padding: 0;
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
-}
-.login-wrap {
+  }
+
+  .login-wrap {
     width: 100vw;
     height: 100vh;
     background-color: #324157;
-}
-.login-title {
+  }
+
+  .login-title {
     position: absolute;
     top: 50%;
     width: 100%;
@@ -23,8 +25,9 @@
     text-align: center;
     font-size: 30px;
     color: #fff;
-}
-.login-panel {
+  }
+
+  .login-panel {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -35,8 +38,9 @@
     border-radius: 5px;
     background: #fff;
     text-align: center;
-}
-.login-name {
+  }
+
+  .login-name {
     margin-bottom: 1rem;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -53,10 +57,11 @@
     line-height: 1;
     outline: 0;
     padding: 3px 10px;
-    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     width: 100%;
-}
-.login-pwd {
+  }
+
+  .login-pwd {
     margin-bottom: 1rem;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -73,10 +78,11 @@
     line-height: 1;
     outline: 0;
     padding: 3px 10px;
-    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     width: 100%;
-}
-.login-submit {
+  }
+
+  .login-submit {
     width: 300px;
     border-color: #4db3ff;
     color: #fff;
@@ -95,49 +101,50 @@
     font-size: 14px;
     border-radius: 4px;
     background-color: #20a0ff;
-}
-.case-number {
+  }
+
+  .case-number {
     margin-top: 1rem;
     font-size: 14px;
     color: #5d5d5d;
-}
+  }
 </style>
 <body>
 <div id="login">
-    <div class="login-wrap">
-        <div class="login-title">博客管理后台</div>
-        <div class="login-panel">
-            <input type="text" class="login-name" placeholder="username" value="">
-            <input type="password" class="login-pwd" placeholder="password" value="">
-            <button type="submit" class="login-submit">Login</button>
-        </div>
+  <div class="login-wrap">
+    <div class="login-title">博客管理后台</div>
+    <div class="login-panel">
+      <input type="text" class="login-name" placeholder="username" value="">
+      <input type="password" class="login-pwd" placeholder="password" value="">
+      <button type="submit" class="login-submit">Login</button>
     </div>
+  </div>
 </div>
 <script>
-window.onload = function(){
+  window.onload = function () {
     var name = document.querySelector('.login-name').value;
     var pwd = document.querySelector('.login-pwd').value;
     var login = document.querySelector('.login-submit');
     login.addEventListener('click', function () {
-        var xhr = new XMLHttpRequest();
-        xhr.open("post", '/api/login', false);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        var obj = {
-            name: document.querySelector('.login-name').value,
-            pwd: document.querySelector('.login-pwd').value
+      var xhr = new XMLHttpRequest();
+      xhr.open("post", '/api/login', false);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      var obj = {
+        name: document.querySelector('.login-name').value,
+        pwd: document.querySelector('.login-pwd').value
+      }
+      xhr.send(JSON.stringify(obj))
+      if (xhr.status >= 200 && xhr.status < 300 || xhr == 304) {
+        if (JSON.parse(xhr.responseText).code == 0) {
+          location.reload();
+        } else {
+          alert(JSON.parse(xhr.responseText).msg)
         }
-        xhr.send(JSON.stringify(obj))
-        if (xhr.status >= 200 && xhr.status < 300 || xhr == 304){
-            if (JSON.parse(xhr.responseText).code==0){
-                location.reload();
-            }else{
-                alert(JSON.parse(xhr.responseText).msg)
-            }
-        }else {
-            console.error('error:'+xhr.responseText)
-        }
+      } else {
+        console.error('error:' + xhr.responseText)
+      }
     })
-}
+  }
 </script>
 </body>
 </html>

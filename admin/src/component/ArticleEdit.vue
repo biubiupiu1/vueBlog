@@ -27,7 +27,6 @@
 
 <script>
 import SimpleMDE from 'simplemde'
-import '../assets/simplemde.css'
 import marked from 'marked';
 import highlight from 'highlight.js'
 import '../assets/atom-one-light.css'

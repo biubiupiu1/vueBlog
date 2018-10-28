@@ -10,9 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "body-parser": "^1.15.2",
     "element-ui": "^1.0.5",
-    "express": "^4.14.0",
     "highlight.js": "^9.8.0",
     "http-proxy-middleware": "^0.17.3",
     "marked": "^0.3.6",

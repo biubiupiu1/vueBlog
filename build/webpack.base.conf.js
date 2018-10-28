@@ -11,6 +11,13 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
+  externals: {
+    'vue': 'Vue',
+    'vue-router': 'VueRouter',
+    'vuex': 'Vuex',
+    'axios': 'axios',
+    'highlight.js': 'hljs'
+  },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',

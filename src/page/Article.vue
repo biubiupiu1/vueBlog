@@ -12,7 +12,7 @@
 <script>
   import marked from 'marked';
   import highlight from 'highlight.js'
-  
+
   export default {
     name: "Article",
     data () {
