@@ -1,9 +1,8 @@
-
 var express = require('express');
 var fs = require('fs');
 var path = require('path');
 var bodyParser = require('body-parser');
-var mime = require('mime');
+var favicon = require('serve-favicon')
 
 var router = require('./router');
 var compression = require('compression');
@@ -13,9 +12,17 @@ var app = express();
 
 var resolve = file => path.resolve(__dirname, file);
 app.use(compression());
-app.use('/Backstage', express.static(resolve('../Backstage')));
-app.use('/home', express.static(resolve('../home')));
-app.use('/biubiupiu', express.static(resolve('../biubiupiu')));
+
+
+var options = {
+  maxAge: 3600000
+};
+
+app.use(favicon(path.join(__dirname, '../favicon.ico')));
+
+app.use('/Backstage', express.static(resolve('../Backstage'), options));
+app.use('/home', express.static(resolve('../home'), options));
+app.use('/biubiupiu', express.static(resolve('../biubiupiu'), options));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -59,6 +66,6 @@ app.get('/', function(req, res) {
     res.send(html)
 });
 
-app.listen(process.env.PORT || 80, function() {
-    console.log("应用实例，访问地址为 localhost:80")
+app.listen(process.env.PORT || 8080, function() {
+    console.log("应用实例，访问地址为 localhost:8080")
 });
