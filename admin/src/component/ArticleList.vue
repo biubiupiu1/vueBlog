@@ -144,7 +144,7 @@ li.active h3,li.active p{
 .router-view {
     position: relative;
     height: 100%;
-    margin-left: 321px;
+    margin-left: 341px;
 }
 .articlePreview-title-publish {
     color: #20a0ff;
