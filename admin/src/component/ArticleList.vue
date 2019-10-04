@@ -81,18 +81,18 @@ export default{
 }
 </script>
 
-<style>
+<style scoped>
 li.active{
     background: #20a0ff;
 }
 li.active h3,li.active p{
-    color: #fff;
+    color: #fff !important;
 }
 </style>
 
 <style scoped>
 .article-list {
-    width: 230px;
+    width: 250px;
     height: 100%;
     position: fixed;
     top: 0;
@@ -122,6 +122,8 @@ li.active h3,li.active p{
 .article-list > ul > li > p {
     font-size: 12px;
     color: #b3bbbc;
+    display: flex;
+    justify-content: space-between
 }
 .article-instructions {
     height: 65px;

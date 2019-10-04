@@ -1,26 +1,5 @@
 <template>
 	<div class="articel-edit-wrap">
-        <div class="article-title">
-            <input type="text" v-model="articleTitle">
-        </div>
-        <div class="article-toolbar">
-            <div class="label">
-                <el-popover ref="tag" placement="top-start" width="150" trigger="click">
-                    <ul class="tag-list-wrap">
-                        <li v-for="item in tags" @click="selectTag(item)">{{item.tagName}}</li>
-                    </ul>
-                </el-popover>
-                <img src="../assets/tag.png" height="30" width="30" v-popover:tag>
-                <el-tag :closable="true" type="success"  :close-transition="false" @close="handleClose" v-if="lable !== ''">
-                    {{lable}}
-                </el-tag>
-            </div>
-            <div class="action-button">
-                <el-button v-if="this.$route.params.id" type="danger" size="small" @click="delectArticles">删除</el-button>
-                <el-button size="small" @click="submit('draft')">保存草稿</el-button>
-                <el-button type="primary" size="small" @click="submit('publish')">发布文章</el-button>
-            </div>
-        </div>
         <textarea id="editor"></textarea>
 	</div>
 </template>

@@ -66,6 +66,6 @@ app.get('/', function(req, res) {
     res.send(html)
 });
 
-app.listen(process.env.PORT || 8080, function() {
-    console.log("应用实例，访问地址为 localhost:8080")
+app.listen(process.env.PORT || 80, function() {
+    console.log("应用实例，访问地址为 localhost:80")
 });

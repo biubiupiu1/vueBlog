@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "遇见你真好-subfont";
+  src: url("遇见你真好-subfont.woff2") format("woff2"),
+       url("遇见你真好-subfont.woff") format("woff"),
+       url("遇见你真好-subfont.ttf") format("truetype"),
+       url("遇见你真好-subfont.eot") format("embedded-opentype"),
+       url("遇见你真好-subfont.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
