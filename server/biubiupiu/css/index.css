@@ -97,3 +97,19 @@ body {
     font-size: .8rem;
   }
 }
+
+.footer {
+  position: fixed;
+  bottom: 5px;
+  font-size: .5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.footer .beian, .footer span {
+  color: #dddddd;
+}
+
+.footer .beian:hover {
+  color: #980f70;
+}

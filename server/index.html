@@ -1,31 +1,32 @@
-<!doctype html> 
+<!doctype html>
 <html>
-<head> 
-  <meta charset="utf8" /> 
+<head>
+  <meta charset="utf8"/>
   <title>biubiupiu</title>
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <link rel="stylesheet" href="biubiupiu/css/index.css" />
+  <link rel="stylesheet" href="biubiupiu/css/index.css"/>
   <script src="https://cdn.bootcss.com/jquery/1.11.1-rc2/jquery.min.js"></script>
   <script type='text/javascript' src='biubiupiu/js/bg.js'></script>
-</head> 
+</head>
 <script>
-(function () {
+  (function () {
 
     function setRem() {
-        var w = document.body.clientWidth;
-        var rem = w * 0.05 > 25 ? 25 : w * 0.05;
-        document.documentElement.style.fontSize = rem + "px";
+      var w = document.body.clientWidth;
+      var rem = w * 0.05 > 25 ? 25 : w * 0.05;
+      document.documentElement.style.fontSize = rem + "px";
     }
-    $(document).ready(function() {
-        $('#biubiupiu').particleground({
-            dotColor: '#5cbdaa',
-            lineColor: '#5cbdaa'
-        });
-        setRem();
+
+    $(document).ready(function () {
+      $('#biubiupiu').particleground({
+        dotColor: '#5cbdaa',
+        lineColor: '#5cbdaa'
+      });
+      setRem();
     });
     window.addEventListener("resize", setRem);
 
-})();
+  })();
 </script>
 <body>
 <div id="biubiupiu">
@@ -40,6 +41,14 @@
       <li><a href="https://weibo.com/6052229892/" target="_blank">微博</a></li>
     </ul>
   </div>
+</div>
+<div class="footer">
+    <span>
+      © 2017-2020 biubiupiu 版权所有
+    </span>
+  <span style="padding-left: 10px">
+        备案号: <a class="beian" href="http://www.beian.miit.gov.cn" target="_blank">赣ICP备17013002号</a>
+    </span>
 </div>
 </body>
 </html>

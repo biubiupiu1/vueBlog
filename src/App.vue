@@ -1,14 +1,18 @@
 <template>
   <div id="app">
-    <my-header></my-header>
-    <div class="content">
-      <router-view></router-view>
+    <div class="top-wrap">
+      <my-header></my-header>
+      <div class="content">
+        <router-view></router-view>
+      </div>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import myHeader from './components/Header.vue'
+import Footer from  './components/Footer'
 export default {
   name: 'app',
   data(){
@@ -16,7 +20,7 @@ export default {
 
       }
   },
-  components:{ myHeader },
+  components:{ myHeader, Footer },
   created(){
     this.ReSize();
     window.addEventListener("resize", () => {
@@ -44,5 +48,11 @@ export default {
   .content{
     width: 85%;
   }
+}
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
 }
 </style>
