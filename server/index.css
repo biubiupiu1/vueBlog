@@ -1,0 +1,99 @@
+@font-face {
+  font-family: "遇见你真好-subfont";
+  src: url("../font/遇见你真好-subfont.woff2") format("woff2"),
+       url("../font/遇见你真好-subfont.woff") format("woff"),
+       url("../font/遇见你真好-subfont.ttf") format("truetype"),
+       url("../font/遇见你真好-subfont.eot") format("embedded-opentype"),
+       url("../font/遇见你真好-subfont.svg") format("svg");
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: #16a085;
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  -webkit-font-smoothing: antialiased;
+}
+
+#biubiupiu {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  z-index: -1;
+}
+
+.about {
+  width: 100%;
+  font-family: '遇见你真好-subfont'
+}
+
+.logo {
+  display: block;
+  width: 600px;
+}
+
+.about h4 {
+  margin: 30px 0 0 0;
+  font-size: 14px;
+  text-align: center;
+  color: #ececef;
+}
+
+.about ul {
+  padding: 0;
+  margin: 20px 0 0 0;
+  text-align: center;
+}
+
+.about li a {
+  text-decoration: none;
+  text-align: center;
+  list-style: none;
+  line-height: 30px;
+  font-size: 19px;
+  color: #ececef;
+}
+
+@media screen and (max-width: 700px) {
+  .about ul {
+    margin-top: .9rem;
+  }
+
+  .con .logo {
+    width: 100%;
+  }
+
+  .about li a {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .about h4 {
+    font-size: .8rem;
+  }
+}
